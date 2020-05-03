@@ -1,5 +1,6 @@
 package com.example.sharedtransitiontest
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,8 +33,17 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<CardView>(R.id.card).setOnClickListener {
-            val extras = FragmentNavigatorExtras(mainText to "mainText", startTime to "startTime", endTime to "endTime", card to "card")
+        view.findViewById<CardView>(R.id.cardView).setOnClickListener {
+            val extras = FragmentNavigatorExtras(
+                cardView to "cardView", dayStringFull to "dayStringFull",
+                textViewStart to "textViewStart", textViewEnd to "textViewEnd",
+                startTime to "startTime", endTime to "endTime")
+            startButton.animate().apply {
+                duration = 130
+                alpha(0f)
+                start()
+            }
+
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, null,null, extras)
         }
     }
